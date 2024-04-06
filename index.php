@@ -30,12 +30,16 @@ $data_video_streaming = array(
                     <div class="card border border-dark">
                         <div class="card-body text-center">
                             <h3><?= $dvs['judul_video']; ?> - <?= $dvs['release']; ?></h3>
-                            <a href="detail-video.php?judul=<?= $dvs['judul_video']; ?>&ep=<?= $dvs['Episode']; ?>">Lihat Detail</a>
+                            <a href="detail.php?judul=<?= $dvs['judul_video']; ?>&ep=<?= $dvs['Episode']; ?>">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
+        <form action="tambah.php" method="post">
+            Masukkan Judul Video : <input type="text" name="judul">
+            <button type="submit" name="submit">Kirim!</button>
+        </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
