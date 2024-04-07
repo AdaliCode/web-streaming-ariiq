@@ -1,12 +1,8 @@
 <?php
 $nama_web_streaming = 'AFLIX';
 $tipe_video_streaming = array('Film', 'Series', 'Anime', 'Variety Show Korea', 'Drama Korea');
-$db = mysqli_connect("localhost", "root", "", "data_vidsstream_ariiq");
-$result = mysqli_query($db, "SELECT * FROM videos");
-$rows = [];
-while ($row = mysqli_fetch_object($result)) {
-    $rows[] = $row;
-}
+require 'functions.php';
+$data_video_streaming = query("SELECT * FROM videos");
 ?>
 
 <!doctype html>
@@ -23,12 +19,12 @@ while ($row = mysqli_fetch_object($result)) {
     <div class="container py-5">
         <h1 class="text-center"><?= $nama_web_streaming; ?></h1>
         <div class="row my-3">
-            <?php foreach ($rows as $key => $dvs) : ?>
+            <?php foreach ($data_video_streaming as $key => $dvs) : ?>
                 <div class="col-md-4 mb-3">
                     <div class="card border border-dark">
                         <div class="card-body text-center">
-                            <h3><?= $dvs->title; ?> - 2024</h3>
-                            <a href="detail.php?judul=<?= $dvs->title; ?>&ep=<?= $dvs->episodes; ?>">Lihat Detail</a>
+                            <h3><?= $dvs['title']; ?> - 2024</h3>
+                            <a href="detail.php?judul=<?= $dvs['title']; ?>&ep=<?= $dvs['episodes'] ?>">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
