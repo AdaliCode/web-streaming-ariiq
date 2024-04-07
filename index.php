@@ -31,12 +31,13 @@ if (isset($_POST["cari"])) {
         </div>
     </nav>
     <div class="container py-5">
-        <a href="tambah.php">Tambah Data Video</a>
+        <a href="video/tambah.php">Tambah Data Video</a>
         <div class="row mt-1">
             <table class="table table-bordered border-dark table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col"></th>
                         <th scope="col">Judul</th>
                         <th scope="col">Tipe</th>
                         <th scope="col">Episode</th>
@@ -47,6 +48,7 @@ if (isset($_POST["cari"])) {
                     <?php foreach ($data_video_streaming as $key => $dvs) : ?>
                         <tr>
                             <th scope="row"><?= $key + 1; ?></th>
+                            <td align="center"><img src="img/<?= $dvs["cover"]; ?>" alt="" width="200"></td>
                             <td><?= $dvs["title"]; ?></td>
                             <td><?= $dvs["vid_type"]; ?></td>
                             <td><?= $dvs["episodes"]; ?></td>
