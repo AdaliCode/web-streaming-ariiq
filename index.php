@@ -1,14 +1,12 @@
 <?php
 $nama_web_streaming = 'AFLIX';
 $tipe_video_streaming = array('Film', 'Series', 'Anime', 'Variety Show Korea', 'Drama Korea');
-$data_video_streaming = array(
-    array(
-        'judul_video' => 'Running Man', 'tipe_video' => 'Variety Show Korea', 'release' => 2010, 'Sinposis' => 'Running Man adalah acara varietas-realita yang dibintangi oleh Yu Jae Seok dan selebriti lainnya. Di tiap episodenya mereka harus menyelesaikan misi di area terkenal untuk memenangkan lomba. Misi-misinya hampir selalu membuat mereka berlari, dari situlah muncul nama acaranya, dan acara yang menegangkan ini penuh dengan keseruan ketika semua anggota timnya berjuang agar selamat.', 'Pemeran' => 'Yoo Jae Suk, Jee Seok Jin, Kim Jong Kook, Haha, Song Jihyo', 'Episode' => 698
-    ),
-    array(
-        'judul_video' => 'Parasyte: The Grey', 'tipe_video' => 'Drama Korea', 'release' => date("F j, Y", mktime(0, 0, 0, 4, 5, 2024)), 'Sinposis' => 'When unidentified parasites violently take over human hosts and gain power, humanity must rise to combat the growing threat.', 'Pemeran' => 'Jeon So Nee, Kim In Kwon', 'Episode' => 6
-    )
-);
+$db = mysqli_connect("localhost", "root", "", "data_vidsstream_ariiq");
+$result = mysqli_query($db, "SELECT * FROM videos");
+$rows = [];
+while ($row = mysqli_fetch_object($result)) {
+    $rows[] = $row;
+}
 ?>
 
 <!doctype html>
@@ -25,12 +23,12 @@ $data_video_streaming = array(
     <div class="container py-5">
         <h1 class="text-center"><?= $nama_web_streaming; ?></h1>
         <div class="row my-3">
-            <?php foreach ($data_video_streaming as $key => $dvs) : ?>
-                <div class="col">
+            <?php foreach ($rows as $key => $dvs) : ?>
+                <div class="col-md-4 mb-3">
                     <div class="card border border-dark">
                         <div class="card-body text-center">
-                            <h3><?= $dvs['judul_video']; ?> - <?= $dvs['release']; ?></h3>
-                            <a href="detail.php?judul=<?= $dvs['judul_video']; ?>&ep=<?= $dvs['Episode']; ?>">Lihat Detail</a>
+                            <h3><?= $dvs->title; ?> - 2024</h3>
+                            <a href="detail.php?judul=<?= $dvs->title; ?>&ep=<?= $dvs->episodes; ?>">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
