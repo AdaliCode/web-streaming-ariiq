@@ -28,3 +28,10 @@ function tambah($data)
 
     return mysqli_affected_rows($db);
 }
+
+function hapus($id)
+{
+    global $db;
+    mysqli_query($db, "DELETE FROM videos WHERE id = $id");
+    return mysqli_affected_rows($db);
+}

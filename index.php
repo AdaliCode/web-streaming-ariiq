@@ -26,6 +26,7 @@ $data_video_streaming = query("SELECT * FROM videos");
                         <th scope="col">Judul</th>
                         <th scope="col">Tipe</th>
                         <th scope="col">Episode</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,10 @@ $data_video_streaming = query("SELECT * FROM videos");
                             <td><?= $dvs["title"]; ?></td>
                             <td><?= $dvs["vid_type"]; ?></td>
                             <td><?= $dvs["episodes"]; ?></td>
+                            <td align="center">
+                                <a href="">Ubah</a> |
+                                <a href="hapus.php?id=<?= $dvs["id"]; ?>" onclick="return confirm('yakin?');">Hapus</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
