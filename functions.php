@@ -13,8 +13,6 @@ function query($query)
     }
     return $rows;
 }
-
-
 function tambah($data)
 {
     global $db;
@@ -34,4 +32,18 @@ function hapus($id)
     global $db;
     mysqli_query($db, "DELETE FROM videos WHERE id = $id");
     return mysqli_affected_rows($db);
+}
+function ubah($data, $id)
+{
+    global $db;
+    $title = htmlspecialchars($data["title"]);
+    $vid_type = htmlspecialchars($data["vid_type"]);
+    $synopsis = htmlspecialchars($data["synopsis"]);
+    $episodes = htmlspecialchars($data["episodes"]);
+    // $email = mysqli_real_escape_string($db, $email);
+    // query insert data
+    $query = "UPDATE videos SET title = '$title', vid_type = '$vid_type', synopsis = '$synopsis', episodes = '$episodes' WHERE id = $id";
+    mysqli_query($db, $query);
+    return mysqli_affected_rows($db);
+    // echo var_dump($id);
 }

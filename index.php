@@ -37,7 +37,7 @@ $data_video_streaming = query("SELECT * FROM videos");
                             <td><?= $dvs["vid_type"]; ?></td>
                             <td><?= $dvs["episodes"]; ?></td>
                             <td align="center">
-                                <a href="">Ubah</a> |
+                                <a href="video/ubah.php?id=<?= $dvs["id"]; ?>">Ubah</a> |
                                 <a href="hapus.php?id=<?= $dvs["id"]; ?>" onclick="return confirm('yakin?');">Hapus</a>
                             </td>
                         </tr>
