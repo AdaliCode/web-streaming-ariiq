@@ -13,3 +13,18 @@ function query($query)
     }
     return $rows;
 }
+
+
+function tambah($data)
+{
+    global $db;
+    $title = htmlspecialchars($data["title"]);
+    $vid_type = htmlspecialchars($data["vid_type"]);
+    $synopsis = htmlspecialchars($data["synopsis"]);
+    $episodes = htmlspecialchars($data["episodes"]);
+    // query insert data
+    $query = "INSERT INTO videos (title, vid_type, synopsis, episodes) VALUES ('$title','$vid_type','$synopsis','$episodes')";
+    mysqli_query($db, $query);
+
+    return mysqli_affected_rows($db);
+}

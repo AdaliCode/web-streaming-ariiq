@@ -19,21 +19,29 @@ $data_video_streaming = query("SELECT * FROM videos");
     <div class="container py-5">
         <h1 class="text-center"><?= $nama_web_streaming; ?></h1>
         <div class="row my-3">
-            <?php foreach ($data_video_streaming as $key => $dvs) : ?>
-                <div class="col-md-4 mb-3">
-                    <div class="card border border-dark">
-                        <div class="card-body text-center">
-                            <h3><?= $dvs['title']; ?> - 2024</h3>
-                            <a href="detail.php?judul=<?= $dvs['title']; ?>&ep=<?= $dvs['episodes'] ?>">Lihat Detail</a>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+            <table class="table table-bordered border-dark table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Judul</th>
+                        <th scope="col">Tipe</th>
+                        <th scope="col">Episode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($data_video_streaming as $key => $dvs) : ?>
+                        <tr>
+                            <th scope="row"><?= $key + 1; ?></th>
+                            <td><?= $dvs["title"]; ?></td>
+                            <td><?= $dvs["vid_type"]; ?></td>
+                            <td><?= $dvs["episodes"]; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
         </div>
-        <form action="tambah.php" method="post">
-            Masukkan Judul Video : <input type="text" name="judul">
-            <button type="submit" name="submit">Kirim!</button>
-        </form>
+        <a href="tambah.php">Tambah Data Video</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
