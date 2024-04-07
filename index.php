@@ -3,6 +3,11 @@ $nama_web_streaming = 'AFLIX';
 $tipe_video_streaming = array('Film', 'Series', 'Anime', 'Variety Show Korea', 'Drama Korea');
 require 'functions.php';
 $data_video_streaming = query("SELECT * FROM videos");
+// tombol cari ditekan
+if (isset($_POST["cari"])) {
+    // nama yang akan query harus sama dengan function cari
+    $data_video_streaming = cari($_POST["keyword"]);
+}
 ?>
 
 <!doctype html>
@@ -16,9 +21,18 @@ $data_video_streaming = query("SELECT * FROM videos");
 </head>
 
 <body>
+    <nav class="navbar bg-body-tertiary sticky-top">
+        <div class="container my-3">
+            <a class="navbar-brand" href=""><?= $nama_web_streaming; ?></a>
+            <form class="d-flex" role="search" action="" method="post">
+                <input class="form-control me-2" type="search" autofocus placeholder="taroh pencarian..." aria-label="Search" name="keyword" autocomplete="off">
+                <button class="btn btn-outline-success" type="submit" name="cari">Search</button>
+            </form>
+        </div>
+    </nav>
     <div class="container py-5">
-        <h1 class="text-center"><?= $nama_web_streaming; ?></h1>
-        <div class="row my-3">
+        <a href="tambah.php">Tambah Data Video</a>
+        <div class="row mt-1">
             <table class="table table-bordered border-dark table-striped">
                 <thead>
                     <tr>
@@ -46,7 +60,6 @@ $data_video_streaming = query("SELECT * FROM videos");
             </table>
 
         </div>
-        <a href="tambah.php">Tambah Data Video</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
