@@ -1,6 +1,11 @@
 <?php
+session_start();
+if (isset($_SESSION["login"])) {
+    header("Location: ../index.php");
+    exit;
+}
 
-require 'functions.php';
+require '../functions.php';
 // cek apakah tombol submit udh dipencet
 if (isset($_POST["login"])) {
     $username = $_POST["username"];
@@ -14,7 +19,9 @@ if (isset($_POST["login"])) {
         // cek password
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row["password"])) { // password_verify ngecek sama apa gak dengan di db, kebalikan password_hash
-            header("Location: index.php");
+            // set session
+            $_SESSION["login"] = true;
+            header("Location: ../index.php");
             exit;
         }
     }
