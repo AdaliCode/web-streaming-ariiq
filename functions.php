@@ -93,17 +93,6 @@ function ubah($data, $id)
     // echo var_dump($id);
 }
 
-function cari($keyword)
-{
-    $query = "SELECT * FROM videos 
-                WHERE
-            title LIKE '%$keyword%' OR
-            vid_type LIKE '%$keyword%' OR
-            episodes LIKE '%$keyword%'
-            ";
-    return query($query);
-}
-
 function registrasi($data)
 {
     global $db;

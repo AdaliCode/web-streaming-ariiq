@@ -6,7 +6,8 @@ if (!isset($_GET["id"])) {
     exit;
 }
 $id = $_GET["id"];
-$data_video_streaming = query("SELECT * FROM videos WHERE id='$id'");
+// $data_video_streaming = query("SELECT * FROM videos WHERE id='$id'");
+$dvt = query("SELECT * FROM videos WHERE id = $id")[0];
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,14 +21,15 @@ $data_video_streaming = query("SELECT * FROM videos WHERE id='$id'");
 
 <body>
     <div class="container py-5 text-center">
-        <h1><?= $data_video_streaming[0]["title"]; ?></h1>
+        <h1><?= $dvt["title"]; ?></h1>
         <img src="../img/661262eb23983.jpeg" alt="" width="200">
         <div class="row mt-3">
-            <p><?= $data_video_streaming[0]["synopsis"]; ?></p>
-            <p>Tipe Video : <?= $data_video_streaming[0]["vid_type"]; ?></p>
-            <p>Episode : <?= $data_video_streaming[0]["episodes"]; ?></p>
-            <p>Tanggal Rilis : <?= date("d M, Y", strtotime($data_video_streaming[0]["vid_release"])); ?></p>
-            <p>Pemeran : <?= $data_video_streaming[0]["cast"]; ?></p>
+            <?php  ?>
+            <p><?= $dvt["synopsis"] ?></p>
+            <p>Tipe Video : <?= $dvt["vid_type"]; ?></p>
+            <p>Episode : <?= $dvt["episodes"]; ?></p>
+            <p>Tanggal Rilis : <?= date("d M, Y", strtotime($dvt["vid_release"])); ?></p>
+            <p>Pemeran : <?= $dvt["cast"]; ?></p>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
