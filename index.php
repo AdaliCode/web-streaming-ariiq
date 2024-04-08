@@ -77,7 +77,7 @@ $data_video_streaming = query("SELECT {$sql} LIMIT $awalData, $jumlahDataPerHala
                                 <a href="video/detail.php?id=<?= $dvs["id"]; ?>" class="text-decoration-none text-dark">Detail</a>
                                 <?php if (isset($_SESSION["login"])) : ?>
                                     | <a href="video/ubah.php?id=<?= $dvs["id"]; ?>" class="text-decoration-none text-warning">Ubah</a> |
-                                    <a href="hapus.php?id=<?= $dvs["id"]; ?>" onclick="return confirm('yakin?');" class="text-decoration-none text-danger">Hapus</a>
+                                    <a href="video/hapus.php?id=<?= $dvs["id"]; ?>&img=<?= $dvs["cover"]; ?>" onclick="return confirm('yakin?');" class="text-decoration-none text-danger">Hapus</a>
                                 <?php endif; ?>
                             </td>
                         </tr>

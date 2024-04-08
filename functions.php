@@ -72,9 +72,13 @@ function upload()
     return $namaFileBaru;
 }
 
-function hapus($id)
+function hapus($id, $img)
 {
     global $db;
+    $target = "../img/" . $img;
+    if (file_exists($target)) {
+        unlink($target);
+    }
     mysqli_query($db, "DELETE FROM videos WHERE id = $id");
     return mysqli_affected_rows($db);
 }
