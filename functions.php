@@ -101,3 +101,45 @@ function cari($keyword)
             ";
     return query($query);
 }
+
+function registrasi($data)
+{
+    global $db;
+
+    $username = strtolower(stripslashes($data["username"])); // stripslashes menghilangkan char _
+    $password = mysqli_real_escape_string($db, $data["password"]); // mysqli_real_escape_string untuk memungkinkan tanpa kutip, butuh 2 parameter
+    $password2 = mysqli_real_escape_string($db, $data["password2"]);
+
+    // Untuk mengatasi string kosong
+    if (empty(trim($username))) {
+        return false;
+    }
+
+    // cek username ada atau tidak
+    $result = mysqli_query($db, "SELECT username FROM users WHERE username = '$username'");
+    if (mysqli_fetch_assoc($result)) {
+        echo
+        "<script>
+                alert('Username sudah terdaftar!');
+            </script>
+            ";
+        return false;
+    }
+
+    // cek konfirmasi pass
+    if ($password !== $password2) {
+        echo
+        "<script>
+                alert('Konfirmasi tak suai pun!');
+            </script>
+            ";
+        return false;
+    }
+
+    // enkripsi password php 5 meggunakan hash, md5 itu dulu
+    $password = password_hash($password, PASSWORD_DEFAULT); // algotritma yang disetting default
+
+    // tambahkan user baru ke database
+    mysqli_query($db, "INSERT INTO users VALUES('','$username', '$password')");
+    return mysqli_affected_rows($db);
+}

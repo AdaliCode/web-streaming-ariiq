@@ -21,18 +21,36 @@ if (isset($_POST["cari"])) {
 </head>
 
 <body>
-    <nav class="navbar bg-body-tertiary sticky-top">
-        <div class="container my-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
             <a class="navbar-brand" href=""><?= $nama_web_streaming; ?></a>
-            <form class="d-flex" role="search" action="" method="post">
-                <input class="form-control me-2" type="search" autofocus placeholder="taroh pencarian..." aria-label="Search" name="keyword" autocomplete="off">
-                <button class="btn btn-outline-success" type="submit" name="cari">Search</button>
-            </form>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto">
+                    <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+                    <a class="nav-link" href="registrasi.php">Registasi</a>
+                    <a class="nav-link" href="login.php">Login</a>
+                    <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+                </div>
+            </div>
         </div>
     </nav>
+    </nav>
     <div class="container py-5">
-        <a href="video/tambah.php">Tambah Data Video</a>
-        <div class="row mt-1">
+        <div class="row">
+            <div class="col">
+                <a href="video/tambah.php" class="h3">Tambah Data Video</a>
+            </div>
+            <div class="col">
+                <form class="d-flex" role="search" action="" method="post">
+                    <input class="form-control me-2" type="search" autofocus placeholder="taroh pencarian..." aria-label="Search" name="keyword" autocomplete="off">
+                    <button class="btn btn-outline-success" type="submit" name="cari">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-3">
             <table class="table table-bordered border-dark table-striped">
                 <thead>
                     <tr>
