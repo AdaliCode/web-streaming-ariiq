@@ -22,7 +22,8 @@ $dvt = query("SELECT * FROM videos WHERE id = $id")[0];
 <body>
     <div class="container py-5 text-center">
         <h1><?= $dvt["title"]; ?></h1>
-        <img src="../img/661262eb23983.jpeg" alt="" width="200">
+
+        <img src="../img/<?= $retVal = ($dvt["cover"] != null) ? $dvt["cover"] : 'attack-on-titan.jpg'; ?>" alt="" width="200">
         <div class="row mt-3">
             <?php  ?>
             <p><?= $dvt["synopsis"] ?></p>
@@ -30,6 +31,7 @@ $dvt = query("SELECT * FROM videos WHERE id = $id")[0];
             <p>Episode : <?= $dvt["episodes"]; ?></p>
             <p>Tanggal Rilis : <?= date("d M, Y", strtotime($dvt["vid_release"])); ?></p>
             <p>Pemeran : <?= $dvt["cast"]; ?></p>
+            <?= $dvt["cover"]; ?>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

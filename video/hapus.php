@@ -4,7 +4,6 @@ $id = $_GET['id'];
 $img = $_GET['img'];
 
 if (hapus($id, $img) > 0) {
-    # code...
     echo
     "<script>
         alert('data berhasil dihapus!');

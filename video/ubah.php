@@ -3,10 +3,16 @@ require '../functions.php';
 
 $id = $_GET["id"];
 $dvt = query("SELECT * FROM videos WHERE id = $id")[0];
+$oldImage = $dvt["cover"];
 
 if (isset($_POST["submit"])) {
-    // cek apakah data berhasil ditambah
-    if (ubah($_POST, $id) > 0) {
+    // cek image lama ada apa gak
+    $target = "../img/" . $oldImage;
+    if (file_exists($target)) {
+        unlink($target);
+    }
+    // cek apakah data berhasil diubah
+    if (ubah($_POST, $id, $oldImage) > 0) {
         # code...
         echo
         "<script>
@@ -40,11 +46,8 @@ if (isset($_POST["submit"])) {
     <div class="container py-5">
         <h1>Ubah Data</h1>
         <div class="row">
-            <div class="col-auto">
-                <img src="../img/661262eb23983.jpeg" alt="" width="200">
-            </div>
             <div class="col">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="title" class="form-label">Judul</label>
                         <input type="text" class="form-control" id="title" name="title" value="<?= $dvt["title"]; ?>" required>
@@ -54,6 +57,10 @@ if (isset($_POST["submit"])) {
                         <input type="text" class="form-control" id="vid_type" name="vid_type" value="<?= $dvt["vid_type"]; ?>" required>
                     </div>
                     <div class="mb-3">
+                        <label for="cover" class="form-label">Cover</label>
+                        <input class="form-control" type="file" id="cover" name="cover">
+                    </div>
+                    <div class=" mb-3">
                         <label for="vid_release" class="form-label">Tanggal Rilis</label>
                         <input type="date" class="form-control" id="vid_release" name="vid_release" value="<?= $dvt["vid_release"]; ?>" required>
                     </div>

@@ -82,7 +82,7 @@ function hapus($id, $img)
     mysqli_query($db, "DELETE FROM videos WHERE id = $id");
     return mysqli_affected_rows($db);
 }
-function ubah($data, $id)
+function ubah($data, $id, $gambarLama)
 {
     global $db;
     $title = htmlspecialchars($data["title"]);
@@ -91,8 +91,15 @@ function ubah($data, $id)
     $synopsis = htmlspecialchars($data["synopsis"]);
     $episodes = htmlspecialchars($data["episodes"]);
     // $email = mysqli_real_escape_string($db, $email);
+    $gambar = upload();
+    if (!$gambar) {
+        return false;
+    }
+    // if ($gambar == $gambarLama) {
+    //     hapus($id, $gambarLama);
+    // }
     // query insert data
-    $query = "UPDATE videos SET title = '$title', vid_type = '$vid_type', vid_release = '$vid_release', synopsis = '$synopsis', episodes = '$episodes' WHERE id = $id";
+    $query = "UPDATE videos SET title = '$title', vid_type = '$vid_type', vid_release = '$vid_release', synopsis = '$synopsis', episodes = '$episodes', cover='$gambar' WHERE id = $id";
     mysqli_query($db, $query);
     return mysqli_affected_rows($db);
     // echo var_dump($id);
