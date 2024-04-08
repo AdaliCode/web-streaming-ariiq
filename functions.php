@@ -18,6 +18,7 @@ function tambah($data)
 {
     global $db;
     $title = htmlspecialchars($data["title"]);
+    $vid_release = htmlspecialchars($data["vid_release"]);
     $vid_type = htmlspecialchars($data["vid_type"]);
     $synopsis = htmlspecialchars($data["synopsis"]);
     $episodes = htmlspecialchars($data["episodes"]);
@@ -27,7 +28,7 @@ function tambah($data)
         return false;
     }
     // query insert data
-    $query = "INSERT INTO videos (title, vid_type, synopsis, episodes, cover) VALUES ('$title','$vid_type','$synopsis','$episodes','$gambar')";
+    $query = "INSERT INTO videos (title, vid_type, vid_release, synopsis, episodes, cover) VALUES ('$title','$vid_type','$vid_release','$synopsis','$episodes','$gambar')";
     mysqli_query($db, $query);
     return mysqli_affected_rows($db);
 }
