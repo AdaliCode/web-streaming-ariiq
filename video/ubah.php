@@ -50,6 +50,10 @@ if (isset($_POST["submit"])) {
                 <input type="text" name="vid_type" id="vid_type" value="<?= $dvt["vid_type"]; ?>" required>
             </li>
             <li>
+                <label for=" vid_release">Tipe : </label>
+                <input type="date" name="vid_release" id="vid_release" value="<?= $dvt["vid_release"]; ?>" required>
+            </li>
+            <li>
                 <label for="synopsis">Sinopsis : </label>
                 <input type="synopsis" name="synopsis" id="synopsis" value="<?= $dvt["synopsis"]; ?>" required>
             </li>

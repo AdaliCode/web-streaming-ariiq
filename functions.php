@@ -2,6 +2,7 @@
 // koneksi ke database
 // nama host, username, password, nama database,
 $db = mysqli_connect("localhost", "root", "", "data_vidsstream_ariiq");
+$nama_web_streaming = 'AFLIX';
 
 function query($query)
 {
@@ -81,11 +82,12 @@ function ubah($data, $id)
     global $db;
     $title = htmlspecialchars($data["title"]);
     $vid_type = htmlspecialchars($data["vid_type"]);
+    $vid_release = htmlspecialchars($data["vid_release"]);
     $synopsis = htmlspecialchars($data["synopsis"]);
     $episodes = htmlspecialchars($data["episodes"]);
     // $email = mysqli_real_escape_string($db, $email);
     // query insert data
-    $query = "UPDATE videos SET title = '$title', vid_type = '$vid_type', synopsis = '$synopsis', episodes = '$episodes' WHERE id = $id";
+    $query = "UPDATE videos SET title = '$title', vid_type = '$vid_type', vid_release = '$vid_release', synopsis = '$synopsis', episodes = '$episodes' WHERE id = $id";
     mysqli_query($db, $query);
     return mysqli_affected_rows($db);
     // echo var_dump($id);

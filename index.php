@@ -1,6 +1,5 @@
 <?php
 session_start();
-$nama_web_streaming = 'AFLIX';
 $tipe_video_streaming = array('Film', 'Series', 'Anime', 'Variety Show Korea', 'Drama Korea');
 require 'functions.php';
 $jumlahDataPerHalaman = 5;
@@ -53,21 +52,18 @@ if (isset($_POST["cari"])) {
             </div>
         </div>
     </nav>
-    </nav>
     <div class="container py-5">
         <h1 class="text-center">Daftar List VidStream</h1>
         <div class="row mt-3">
             <table class="table table-bordered border-dark table-striped">
-                <thead>
+                <thead align="center">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col"></th>
                         <th scope="col">Judul</th>
                         <th scope="col">Tipe</th>
-                        <th scope="col">Episode</th>
-                        <?php if (isset($_SESSION["login"])) : ?>
-                            <th scope="col"></th>
-                        <?php endif; ?>
+                        <th scope="col">Tanggal Rilis</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,14 +73,15 @@ if (isset($_POST["cari"])) {
                             <th scope="row"><?= $i + $awalData ?></th>
                             <td align="center"><img src="img/<?= $dvs["cover"]; ?>" alt="" width="100"></td>
                             <td><?= $dvs["title"]; ?></td>
-                            <td><?= $dvs["vid_type"]; ?></td>
-                            <td><?= $dvs["episodes"]; ?></td>
-                            <?php if (isset($_SESSION["login"])) : ?>
-                                <td align="center">
-                                    <a href="video/ubah.php?id=<?= $dvs["id"]; ?>">Ubah</a> |
-                                    <a href="hapus.php?id=<?= $dvs["id"]; ?>" onclick="return confirm('yakin?');">Hapus</a>
-                                </td>
-                            <?php endif; ?>
+                            <td align="center"><?= $dvs["vid_type"]; ?></td>
+                            <td align="center"> <?= date("d M, Y", strtotime($dvs["vid_release"])); ?></td>
+                            <td align="center">
+                                <a href="video/detail.php?id=<?= $dvs["id"]; ?>" class="text-decoration-none text-dark">Detail</a>
+                                <?php if (isset($_SESSION["login"])) : ?>
+                                    | <a href="video/ubah.php?id=<?= $dvs["id"]; ?>" class="text-decoration-none text-warning">Ubah</a> |
+                                    <a href="hapus.php?id=<?= $dvs["id"]; ?>" onclick="return confirm('yakin?');" class="text-decoration-none text-danger">Hapus</a>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                         <?php $i++ ?>
                     <?php endforeach; ?>
