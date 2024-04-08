@@ -1,11 +1,23 @@
 <?php
 session_start();
+require '../functions.php';
+if (isset($_COOKIE['id']) && isset($_COOKIE['key'])) {
+    $id = $_COOKIE['id'];
+    $key = $_COOKIE['key'];
+
+    // ambil username berdasarkan id
+    $result = mysqli_query($db, "SELECT username FROM users WHERE id = '$id'");
+    $row = mysqli_fetch_assoc($result);
+
+    // cek cookie dan username, bukan cookie yang dicopy
+    if ($key === hash('sha256', $row['username'])) {
+        $_SESSION['login'] = true;
+    }
+}
 if (isset($_SESSION["login"])) {
     header("Location: ../index.php");
     exit;
 }
-
-require '../functions.php';
 // cek apakah tombol submit udh dipencet
 if (isset($_POST["login"])) {
     $username = $_POST["username"];
@@ -18,9 +30,14 @@ if (isset($_POST["login"])) {
     if (mysqli_num_rows($result) === 1) {
         // cek password
         $row = mysqli_fetch_assoc($result);
-        if (password_verify($password, $row["password"])) { // password_verify ngecek sama apa gak dengan di db, kebalikan password_hash
-            // set session
+        if (password_verify($password, $row["password"])) {
             $_SESSION["login"] = true;
+            // cek remember me
+            if (isset($_POST['remember'])) {
+                # buat cookie
+                setcookie('id', $row['id'], time() + 60);
+                setcookie('key', hash('sha256', $row['username']), time() + 60);
+            }
             header("Location: ../index.php");
             exit;
         }
@@ -56,6 +73,10 @@ if (isset($_POST["login"])) {
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control border border-dark" name="password" id="password">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                        <label class="form-check-label" for="remember">Remember Me</label>
                     </div>
                     <button type="submit" name="login" class="btn btn-primary">Submit</button>
                 </form>
