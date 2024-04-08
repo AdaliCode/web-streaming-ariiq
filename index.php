@@ -3,7 +3,14 @@ session_start();
 $nama_web_streaming = 'AFLIX';
 $tipe_video_streaming = array('Film', 'Series', 'Anime', 'Variety Show Korea', 'Drama Korea');
 require 'functions.php';
-$data_video_streaming = query("SELECT * FROM videos");
+$jumlahDataPerHalaman = 5;
+$jumlahData = count(query("SELECT * FROM videos"));
+$jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+$halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+$awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
+
+$data_video_streaming = query("SELECT * FROM videos LIMIT $awalData, $jumlahDataPerHalaman");
+// $data_video_streaming = query("SELECT * FROM videos");
 // tombol cari ditekan
 if (isset($_POST["cari"])) {
     // nama yang akan query harus sama dengan function cari
@@ -24,7 +31,7 @@ if (isset($_POST["cari"])) {
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href=""><?= $nama_web_streaming; ?></a>
+            <a class="navbar-brand" href="index.php"><?= $nama_web_streaming; ?></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -64,9 +71,10 @@ if (isset($_POST["cari"])) {
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $i = 1 ?>
                     <?php foreach ($data_video_streaming as $key => $dvs) : ?>
                         <tr>
-                            <th scope="row"><?= $key + 1; ?></th>
+                            <th scope="row"><?= $i + $awalData ?></th>
                             <td align="center"><img src="img/<?= $dvs["cover"]; ?>" alt="" width="100"></td>
                             <td><?= $dvs["title"]; ?></td>
                             <td><?= $dvs["vid_type"]; ?></td>
@@ -78,6 +86,7 @@ if (isset($_POST["cari"])) {
                                 </td>
                             <?php endif; ?>
                         </tr>
+                        <?php $i++ ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -85,6 +94,22 @@ if (isset($_POST["cari"])) {
         <?php if (isset($_SESSION["login"])) : ?>
             <a href="video/tambah.php">Tambah Data Video</a>
         <?php endif; ?>
+        <!-- page -->
+        <div class="float-end">
+            <?php if ($halamanAktif > 1) : ?>
+                <a href="?halaman=<?= $halamanAktif - 1; ?>">&lt;</a>
+            <?php endif ?>
+            <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                <?php if ($i == $halamanAktif) : ?>
+                    <a href="?halaman=<?= $i; ?>" style="font-weight: bold;"><?= $i; ?></a>
+                <?php else : ?>
+                    <a href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                <?php endif ?>
+            <?php endfor ?>
+            <?php if ($halamanAktif < $jumlahHalaman) : ?>
+                <a href="?halaman=<?= $halamanAktif + 1; ?>">&gt;</a>
+            <?php endif ?>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
