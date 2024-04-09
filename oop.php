@@ -3,24 +3,22 @@
 class Vidstream
 {
     // property
-    public $title, $cast, $episodes;
+    public $title, $cast;
     // variabel lokal
-    public function __construct($title = "title", $cast = "cast", $episodes = "0")
+    public function __construct($title = "title", $cast = "cast")
     {
         $this->title = $title;
         $this->cast = $cast;
-        $this->episodes = $episodes;
     }
     // method
     public function getCast()
     {
-        // this buat memanggil global atau dalam class
         return "$this->cast";
     }
 
     public function getInfoVidstream()
     {
-        $str = "Nama Series : {$this->title} | Pemeran : {$this->getCast()} | Episode {$this->episodes}";
+        $str = "{$this->title} | Pemeran : {$this->getCast()} ";
         return $str;
     }
 }
@@ -30,25 +28,40 @@ class Film extends Vidstream
 {
     public function getInfoVidstream()
     {
-        $str = "Nama Film : {$this->title} | Pemeran : {$this->getCast()}";
+        // :: adalah method static
+        $str = "Nama Film : " . parent::getInfoVidstream();
+        return $str;
+    }
+}
+class Series extends Vidstream
+{
+    public $episodes;
+    public function __construct($title = "title", $cast = "cast", $episodes = "0")
+    {
+        parent::__construct($title, $cast);
+        $this->episodes = $episodes;
+    }
+    public function getInfoVidstream()
+    {
+        $str = "Nama Series : " . parent::getInfoVidstream() . "| Episode :{$this->episodes} ";
         return $str;
     }
 }
 // class yang mengambil data dari class atasan
 // cetak class
-class CetakInfoVidstream
-{
-    // instance dari class Vidstream
-    public function cetak(Vidstream $vstream)
-    {
-        $str = "Jdul : {$vstream->title} |  Pemeran : {$vstream->getCast()}";
-        return $str;
-    }
-}
+// class CetakInfoVidstream
+// {
+//     // instance dari class Vidstream
+//     public function cetak(Vidstream $vstream)
+//     {
+//         $str = "Jdul : {$vstream->title} | Pemeran : {$vstream->getCast()}";
+//         return $str;
+//     }
+// }
 
 // object
-$vids = new Vidstream("Running Man", "Song Jihyo, Yoo Jae Suk", "628");
-$vids2 = new Vidstream("Pyramid Game", "Bona WJSN, Kim Da Ah", "10");
+$vids = new Series("Running Man", "Song Jihyo, Yoo Jae Suk", "628");
+$vids2 = new Series("Pyramid Game", "Bona WJSN, Kim Da Ah", "10");
 $vids3 = new Film("The Beekeeper", "Jason Statham");
 
 echo $vids->getInfoVidstream() . "<br>";
