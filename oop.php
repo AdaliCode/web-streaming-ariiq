@@ -1,8 +1,8 @@
 <?php
 // class
-class Vidstream
+abstract class Vidstream
 {
-    // property
+    const web_name = 'AFLIX';
     public $title, $cast;
     protected $extraEpisode;
     public function __construct($title = "title", $cast = "cast")
@@ -15,20 +15,21 @@ class Vidstream
         return "$this->cast";
     }
 
+    // abstract can't contain body, and must exist in the child
+    abstract public function getInfo();
     public function getInfoVidstream()
     {
         $str = "{$this->title} | Pemeran : {$this->getCast()} ";
         return $str;
     }
 }
-
 // inheritance class
 class Film extends Vidstream
 {
-    public function getInfoVidstream()
+    public function getInfo()
     {
         // :: adalah method static
-        $str = "Nama Film : " . parent::getInfoVidstream();
+        $str = "Nama Film : " . $this->getInfoVidstream();
         return $str;
     }
 }
@@ -40,9 +41,9 @@ class Series extends Vidstream
         parent::__construct($title, $cast);
         $this->episodes = $episodes;
     }
-    public function getInfoVidstream()
+    public function getinfo()
     {
-        $str = "Nama Series : " . parent::getInfoVidstream() . "| Episode :{$this->episodes} ";
+        $str = "Nama Series : " . $this->getInfoVidstream() . "| Episode :{$this->episodes} ";
         return $str;
     }
 }
@@ -67,9 +68,9 @@ class Variety extends Vidstream
     {
         $this->episodesExtra = $episodesExtra;
     }
-    public function getInfoVidstream()
+    public function getInfo()
     {
-        $str = "Nama Series : " . parent::getInfoVidstream() . "| Episode :{$this->episodes} ";
+        $str = "Nama Series : " . $this->getInfoVidstream() . "| Episode :{$this->episodes} ";
         return $str;
     }
 }
@@ -90,9 +91,11 @@ $vids = new Variety("Running Man", "Song Jihyo, Yoo Jae Suk", 600);
 $vids2 = new Series("Pyramid Game", "Bona WJSN, Kim Da Ah", 10);
 $vids3 = new Film("The Beekeeper", "Jason Statham");
 
-echo $vids->getInfoVidstream() . "<br>";
-echo $vids2->getInfoVidstream() . "<br>";
-echo $vids3->getInfoVidstream() . "<br>";
+echo 'Nama Web : ' . Vidstream::web_name . "<br>";
+echo '==================================<br>';
+echo $vids->getInfo() . "<br>";
+echo $vids2->getInfo() . "<br>";
+echo $vids3->getInfo() . "<br>";
 
 
 $vids->setepisodesExtra(28);
