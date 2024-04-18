@@ -4,13 +4,12 @@ class Vidstream
 {
     // property
     public $title, $cast;
-    // variabel lokal
+    protected $extraEpisode;
     public function __construct($title = "title", $cast = "cast")
     {
         $this->title = $title;
         $this->cast = $cast;
     }
-    // method
     public function getCast()
     {
         return "$this->cast";
@@ -36,10 +35,37 @@ class Film extends Vidstream
 class Series extends Vidstream
 {
     public $episodes;
-    public function __construct($title = "title", $cast = "cast", $episodes = "0")
+    public function __construct($title = "title", $cast = "cast", $episodes = 0)
     {
         parent::__construct($title, $cast);
         $this->episodes = $episodes;
+    }
+    public function getInfoVidstream()
+    {
+        $str = "Nama Series : " . parent::getInfoVidstream() . "| Episode :{$this->episodes} ";
+        return $str;
+    }
+}
+class Variety extends Vidstream
+{
+    private $episodes;
+    protected $episodesExtra;
+    // protected itu dengan class dan turunannya
+    // private itu dengan classnya doang
+    public function getEpisode()
+    {
+        return "Episode " . $this->title  . " setelah ditambah episodenya dengan " . $this->episodesExtra . " adalah " . $this->episodes + $this->episodesExtra;
+    }
+    public function __construct($title = "title", $cast = "cast", $episodes = 0)
+    {
+        parent::__construct($title, $cast);
+        $this->episodes = $episodes;
+    }
+
+    // bisa diaplikasikan ke inherritance lain
+    public function setepisodesExtra($episodesExtra)
+    {
+        $this->episodesExtra = $episodesExtra;
     }
     public function getInfoVidstream()
     {
@@ -60,13 +86,17 @@ class Series extends Vidstream
 // }
 
 // object
-$vids = new Series("Running Man", "Song Jihyo, Yoo Jae Suk", "628");
-$vids2 = new Series("Pyramid Game", "Bona WJSN, Kim Da Ah", "10");
+$vids = new Variety("Running Man", "Song Jihyo, Yoo Jae Suk", 600);
+$vids2 = new Series("Pyramid Game", "Bona WJSN, Kim Da Ah", 10);
 $vids3 = new Film("The Beekeeper", "Jason Statham");
 
 echo $vids->getInfoVidstream() . "<br>";
 echo $vids2->getInfoVidstream() . "<br>";
 echo $vids3->getInfoVidstream() . "<br>";
+
+
+$vids->setepisodesExtra(28);
+echo $vids->getEpisode();
 
 // $infovids = new CetakInfoVidstream();
 // echo $infovids->cetak($vids2);
