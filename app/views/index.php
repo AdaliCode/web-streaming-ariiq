@@ -12,15 +12,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <?php $i = 1 ?>
-                    <?php foreach ($data_video_streaming as $key => $dvs) : ?>
+                    <?php $i = 1 ?>
+                    <?php foreach ($data['data_video_streaming'] as $key => $dvs) : ?>
                         <tr>
-                            <th scope="row"><?= $i + $awalData ?></th>
+                            <!-- <th scope="row"><?= $i + $awalData ?></th> -->
+                            <th scope="row"><?= $i ?></th>
                             <td align="center"><?= $dvs["title"]; ?></td>
                             <td align="center"><?= $dvs["vid_type"]; ?></td>
                             <td align="center"> <?= date("d M, Y", strtotime($dvs["vid_release"])); ?></td>
                             <td align="center">
-                                <a href="video/detail.php?id=<?= $dvs["id"]; ?>" class="text-decoration-none text-dark">Detail</a>
+                                <a href="<?= BASEURL; ?>/video" class="text-decoration-none text-dark">Detail</a>
                                 <?php if (isset($_SESSION["login"])) : ?>
                                     | <a href="video/ubah.php?id=<?= $dvs["id"]; ?>" class="text-decoration-none text-warning">Ubah</a> |
                                     <a href="video/hapus.php?id=<?= $dvs["id"]; ?>&img=<?= $dvs["cover"]; ?>" onclick="return confirm('yakin?');" class="text-decoration-none text-danger">Hapus</a>
@@ -28,7 +29,7 @@
                             </td>
                         </tr>
                         <?php $i++ ?>
-                    <?php endforeach; ?> -->
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
