@@ -2,27 +2,25 @@
 class Vidstream_model
 {
 
-    private $dbh; // database handler
-    private $stmt;
+    private $table = 'videos'; // database handler
+    private $db;
 
     public function __construct()
     {
-        // data source name
-        $dsn = 'mysql:host=localhost;dbname=data_vidsstream_ariiq';
-
-        try {
-            $this->dbh = new PDO($dsn, 'root', ''); // handler PDO
-        } catch (PDOException $e) {
-            //throw $th;
-            die($e->getMessage());
-        }
+        $this->db = new Database;
     }
 
     public function getAllvideos()
     {
-        // kalau pakai PDO, maka harus prepare dulu
-        $this->stmt = $this->dbh->prepare("SELECT * FROM videos");
-        $this->stmt->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_ASSOC); // fetch itu ambil
+        $this->db->query('SELECT * FROM ' . $this->table);
+        return $this->db->resultSet();
+    }
+    public function getVideoById($id)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id=:id');
+
+        // Binding dimaksudkan sebagai pengikatan (association) antara suatu entity dengan atributnya
+        $this->db->bind('id', $id);
+        return $this->db->single();
     }
 }
