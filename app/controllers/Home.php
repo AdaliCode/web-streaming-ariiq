@@ -6,9 +6,9 @@ class Home extends Controller
     public function index()
     {
         $data['title'] = 'Home';
-        // $this->view('templates/header', $data); //buat method view yang ada di controller
-        $this->view('templates/header');
-        $this->view('home/index');
+        $this->view('templates/header-php/index'); // header php
+        $this->view('templates/header', $data); // header html
+        $this->view('index');
         $this->view('templates/footer');
     }
 }
