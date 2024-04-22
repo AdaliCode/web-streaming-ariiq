@@ -37,7 +37,6 @@ class Database
     public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
-            # code...
             switch (true) {
                 case is_int($value):
                     $type = PDO::PARAM_INT;
@@ -71,5 +70,10 @@ class Database
         // tampilin satu data
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_ASSOC); // tampilan array associative
+    }
+
+    public function rowCount()
+    {
+        return $this->stmt->rowCount();
     }
 }

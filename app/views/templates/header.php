@@ -25,10 +25,10 @@
                 <div class="navbar-nav ms-auto">
                     <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
                     <?php if (!isset($_SESSION["login"])) : ?>
-                        <a class="nav-link" href="user/registrasi.php">Registrasi</a>
+                        <a class="nav-link" href="<?= BASEURL; ?>/register">Registrasi</a>
                         <a class="nav-link" href="<?= BASEURL; ?>/login">Login</a>
                     <?php else : ?>
-                        <a class="nav-link" href="user/logout.php">Logout</a>
+                        <a class="nav-link" href="<?= BASEURL; ?>/login/logout">Logout</a>
                     <?php endif; ?>
                     <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
                 </div>

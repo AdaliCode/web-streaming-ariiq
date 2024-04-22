@@ -1,6 +1,6 @@
 <?php
 
-
+session_start();
 class Home extends Controller // Home === videos
 {
     public function index()

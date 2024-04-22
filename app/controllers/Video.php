@@ -11,4 +11,11 @@ class Video extends Controller // Home === videos
         $this->view('video/detail', $data);
         $this->view('templates/footer');
     }
+    public function add()
+    {
+        if ($this->model('Vidstream_model')->addDataVideo($_POST) > 0) {
+            header('Location: ' . BASEURL . '/');
+            exit;
+        }
+    }
 }

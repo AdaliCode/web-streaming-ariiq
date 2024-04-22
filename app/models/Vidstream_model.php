@@ -23,4 +23,19 @@ class Vidstream_model
         $this->db->bind('id', $id);
         return $this->db->single();
     }
+    public function addDataVideo($data)
+    {
+        $query = "INSERT INTO videos VALUES ('', :title, :vid_type, :vid_release, :synopsis, :episodes, :cover)";
+
+        $this->db->query($query);
+        $this->db->bind('title', $data['title']);
+        $this->db->bind('vid_type', $data['vid_type']);
+        $this->db->bind('vid_release', $data['vid_release']);
+        $this->db->bind('synopsis', $data['synopsis']);
+        $this->db->bind('episodes', $data['episodes']);
+        $this->db->bind('cover', $data['cover']);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
