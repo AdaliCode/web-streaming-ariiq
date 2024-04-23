@@ -45,20 +45,6 @@ class Login extends Controller
              </script>
             ";
         }
-
-        // cek adakah username di table users
-        // $result = mysqli_query($db, "SELECT * FROM users WHERE username = '$username' ");
-
-        // mysqli_num_rows ngecek berapa baris yang dikembalikan dari query
-        // if (mysqli_num_rows($result) === 1) {
-        //     // cek password
-        //     $row = mysqli_fetch_assoc($result);
-        //     if (password_verify($password, $row["password"])) { // password_verify ngecek sama apa gak dengan di db, kebalikan password_hash
-        //         header("Location: index.php");
-        //         exit;
-        //     }
-        // }
-        // $error = true;
     }
 
     // post

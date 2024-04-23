@@ -35,6 +35,6 @@
         </table>
     </div>
     <?php if (isset($_SESSION["login"])) : ?>
-        <a href="video/tambah.php">Tambah Data Video</a>
+        <a href="<?= BASEURL; ?>/video/add">Tambah Data Video</a>
     <?php endif; ?>
 </div>
