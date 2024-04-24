@@ -60,7 +60,8 @@ class Vidstream_model
         move_uploaded_file($tmpName,  'img/' . $namaFileBaru);
         return $namaFileBaru;
     }
-    public function store($data)
+
+    public function validateexImage($data)
     {
         $title = htmlspecialchars($data["title"]);
         $vid_release = htmlspecialchars($data["vid_release"]);
@@ -74,6 +75,11 @@ class Vidstream_model
             </script>";
             return false;
         }
+    }
+    public function store($data)
+    {
+        // validasi selain image
+        $this->validateexImage($data);
         // upload gambar
         $gambar = $this->upload();
         if (!$gambar) {
@@ -82,11 +88,11 @@ class Vidstream_model
         $query = "INSERT INTO videos (title, vid_type, vid_release, synopsis, episodes, cover) VALUES (:title, :vid_type, :vid_release, :synopsis, :episodes, :cover)";
 
         $this->db->query($query);
-        $this->db->bind('title', $title);
-        $this->db->bind('vid_type', $vid_type);
-        $this->db->bind('vid_release', $vid_release);
-        $this->db->bind('synopsis', $synopsis);
-        $this->db->bind('episodes', $episodes);
+        $this->db->bind('title', $data['title']);
+        $this->db->bind('vid_type', $data['vid_type']);
+        $this->db->bind('vid_release', $data['vid_release']);
+        $this->db->bind('synopsis', $data['synopsis']);
+        $this->db->bind('episodes', $data['episodes']);
         $this->db->bind('cover', $gambar);
         $this->db->execute();
 
@@ -105,6 +111,42 @@ class Vidstream_model
         $query = "DELETE from videos WHERE id = :id";
         $this->db->query($query);
         $this->db->bind('id', $id);  // memasukkan id
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function update($data, $id)
+    {
+        // validasi selain image
+        $this->validateexImage($data);
+        // upload gambar
+        $gambar = $this->upload();
+        if (!$gambar) {
+            return false;
+        }
+        $datafordeleteimage = $this->getVideoById($id);
+        $target = "img/" . $datafordeleteimage['cover'];
+        if (file_exists($target)) {
+            unlink($target);
+        }
+        $query = "UPDATE videos SET 
+        title = :title,
+        vid_type = :vid_type, 
+        vid_release = :vid_release,
+        synopsis = :synopsis,
+        episodes = :episodes,
+        cover = :cover
+        WHERE id = :id";
+
+        $this->db->query($query);
+        $this->db->bind('title', $data['title']);
+        $this->db->bind('vid_type', $data['vid_type']);
+        $this->db->bind('vid_release', $data['vid_release']);
+        $this->db->bind('synopsis', $data['synopsis']);
+        $this->db->bind('episodes', $data['episodes']);
+        $this->db->bind('cover', $gambar);
+        $this->db->bind('id', $id);
         $this->db->execute();
 
         return $this->db->rowCount();

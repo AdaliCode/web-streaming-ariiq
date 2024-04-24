@@ -24,7 +24,7 @@
                             <!-- hrefnya menuju controller, bukan view, view diurus controlller -->
                             <a href="<?= BASEURL; ?>/video/detail/<?= $dvs['id'] ?>" class="text-decoration-none text-dark">Detail</a>
                             <?php if (isset($_SESSION["login"])) : ?>
-                                | <a href="video/ubah.php?id=<?= $dvs["id"]; ?>" class="text-decoration-none text-warning">Ubah</a> |
+                                | <a href="video/edit/<?= $dvs["id"]; ?>" class="text-decoration-none text-warning">Ubah</a> |
                                 <a href="video/delete/<?= $dvs["id"]; ?>" onclick="return confirm('yakin?');" class="text-decoration-none text-danger">Hapus</a>
                             <?php endif; ?>
                         </td>
