@@ -151,4 +151,13 @@ class Vidstream_model
 
         return $this->db->rowCount();
     }
+
+    public function search()
+    {
+        $keyword = $_POST['keyword'];
+        $query = "SELECT * FROM videos WHERE title LIKE :keyword or vid_type LIKE :keyword or vid_release LIKE :keyword or synopsis LIKE :keyword or episodes LIKE :keyword ";
+        $this->db->query($query);
+        $this->db->bind('keyword', "%$keyword%");
+        return $this->db->resultSet();
+    }
 }

@@ -18,9 +18,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <form class="d-flex" role="search" action="index.php" method="get">
+                <form class="d-flex" role="search" action="<?= BASEURL; ?>/video/search" method="post">
                     <input class="form-control me-2 border border-success" type="search" autofocus placeholder="taroh pencarian..." aria-label="Search" name="keyword" autocomplete="off">
-                    <!-- <button class="btn btn-outline-success" type="submit" name="cari">Search</button> -->
+                    <button class="btn btn-primary" type="submit" id="tombolari">Cari</button>
                 </form>
                 <div class="navbar-nav ms-auto">
                     <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->

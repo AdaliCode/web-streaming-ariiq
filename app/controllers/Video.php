@@ -78,4 +78,13 @@ class Video extends Controller // Home === videos
             Flasher::flash();
         }
     }
+
+    public function search()
+    {
+        $data['title'] = 'Hasil Pencarian untuk "' . $_POST['keyword'] . '"';
+        $data['data_video_streaming'] = $this->model('Vidstream_model')->search();
+        $this->view('templates/header', $data); // header html
+        $this->view('index', $data);
+        $this->view('templates/footer');
+    }
 }
