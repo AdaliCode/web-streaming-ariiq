@@ -3,7 +3,6 @@ class Register extends Controller
 {
     public function index()
     {
-        session_start();
         if (isset($_COOKIE['id']) && isset($_COOKIE['key'])) {
             $id = $_COOKIE['id'];
             $key = $_COOKIE['key'];

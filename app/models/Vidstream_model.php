@@ -92,4 +92,21 @@ class Vidstream_model
 
         return $this->db->rowCount();
     }
+    public function delete($id)
+    {
+        // for delete file image
+        $datafordeleteimage = $this->getVideoById($id);
+        $target = "img/" . $datafordeleteimage['cover'];
+        if (file_exists($target)) {
+            unlink($target);
+        }
+
+        // for delete data
+        $query = "DELETE from videos WHERE id = :id";
+        $this->db->query($query);
+        $this->db->bind('id', $id);  // memasukkan id
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }

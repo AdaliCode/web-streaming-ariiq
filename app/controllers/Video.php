@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 class Video extends Controller // Home === videos
 {
     public function detail($id)
@@ -23,19 +22,22 @@ class Video extends Controller // Home === videos
     public function store()
     {
         if ($this->model('Vidstream_model')->store($_POST) > 0) {
-            echo
-            "<script>
-                alert('data berhasil ditambahkan!');
-                document.location.href = '../';
-             </script>
-            ";
+            Flasher::setFlash('Video', 'berhasil', 'ditambahkan', '../');
+            Flasher::flash();
         } else {
-            echo
-            "<script>
-                alert('data gagal ditambahkan!');
-                document.location.href = '../video/add';
-             </script>
-            ";
+            Flasher::setFlash('Video', 'gagal', 'ditambahkan', '../video/add');
+            Flasher::flash();
+        }
+    }
+
+    public function delete($id)
+    {
+        if ($this->model('Vidstream_model')->delete($id) > 0) {
+            Flasher::setFlash('Video', 'berhasil', 'dihapus', '../../');
+            Flasher::flash();
+        } else {
+            Flasher::setFlash('Video', 'gagal', 'dihapus', '../../');
+            Flasher::flash();
         }
     }
 }
