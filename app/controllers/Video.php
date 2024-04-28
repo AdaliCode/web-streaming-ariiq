@@ -83,6 +83,14 @@ class Video extends Controller // Home === videos
     {
         $data['title'] = 'Hasil Pencarian untuk "' . $_POST['keyword'] . '"';
         $data['data_video_streaming'] = $this->model('Vidstream_model')->search();
+        $jumlahDataPerHalaman = 5;
+        $jumlahData = count($data['data_video_streaming']);
+        $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman); //butuh
+        $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1; //butuh
+        $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
+
+        $data['data_video_streaming'] = $this->model('Vidstream_model')->search($awalData, $jumlahDataPerHalaman);
+        $data['page_component'] = array($jumlahHalaman, $halamanAktif, $awalData);
         $this->view('templates/header', $data); // header html
         $this->view('index', $data);
         $this->view('templates/footer');

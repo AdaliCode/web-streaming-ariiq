@@ -9,9 +9,13 @@ class Vidstream_model
     {
         $this->db = new Database;
     }
-    public function getAllvideos()
+    public function getAllvideos($awalData = null, $jumlahDataPerLimit = null)
     {
-        $this->db->query('SELECT * FROM ' . $this->table);
+        if (is_null($jumlahDataPerLimit)) {
+            $this->db->query('SELECT * FROM ' . $this->table);
+        } else {
+            $this->db->query("SELECT * FROM {$this->table} LIMIT {$awalData}, {$jumlahDataPerLimit}");
+        }
         return $this->db->resultSet();
     }
     public function getVideoById($id)
@@ -152,10 +156,15 @@ class Vidstream_model
         return $this->db->rowCount();
     }
 
-    public function search()
+    public function search($awalData = null, $jumlahDataPerLimit = null)
     {
-        $keyword = $_POST['keyword'];
-        $query = "SELECT * FROM videos WHERE title LIKE :keyword or vid_type LIKE :keyword or vid_release LIKE :keyword or synopsis LIKE :keyword or episodes LIKE :keyword ";
+        $keyword = $_GET['keyword'];
+        if (is_null($jumlahDataPerLimit)) {
+            $query = "SELECT * FROM videos WHERE title LIKE :keyword";
+        } else {
+            $query = "SELECT * FROM videos WHERE title LIKE :keyword LIMIT {$awalData}, {$jumlahDataPerLimit}";
+        }
+
         $this->db->query($query);
         $this->db->bind('keyword', "%$keyword%");
         return $this->db->resultSet();

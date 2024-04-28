@@ -1,6 +1,6 @@
 <?php
 
-define('BASEURL', 'http://localhost/web-streaming-ariiq/public');
+define('BASEURL', 'http://localhost/web-Streaming/public');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');

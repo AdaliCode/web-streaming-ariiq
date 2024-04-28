@@ -19,7 +19,7 @@
                         </div>
                         <button type="submit" name="login" class="btn btn-primary">Login</button>
                     </form>
-                    <p class="mt-3">Belum Login? <a href="registrasi.php">Registrasi</a> atuh!</p>
+                    <p class="mt-3">Belum Login? <a href="<?= BASEURL; ?>/register">Registrasi</a> atuh!</p>
                 </div>
             </div>
         </div>
