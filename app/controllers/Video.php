@@ -6,6 +6,7 @@ class Video extends Controller // Home === videos
     {
         $data['data_video_streaming'] = $this->model('Vidstream_model')->getVideoById($id);
         $data['title'] = $data['data_video_streaming']['title'];
+        $data['vid_release'] = $this->indo_date_format($data['data_video_streaming']['vid_release']);
         $this->view('templates/header', $data); // header html
         $this->view('video/detail', $data);
         $this->view('templates/footer');
