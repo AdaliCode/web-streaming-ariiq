@@ -25,7 +25,6 @@
                     <!-- <button class="btn btn-primary" type="submit" id="tombolari">Cari</button> -->
                 </form>
                 <div class="navbar-nav ms-auto">
-                    <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
                     <?php if (!isset($_SESSION["login"])) : ?>
                         <a class="nav-link" href="<?= BASEURL; ?>/register">Registrasi</a>
                         <a class="nav-link" href="<?= BASEURL; ?>/login">Login</a>
