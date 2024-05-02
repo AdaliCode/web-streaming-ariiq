@@ -7,6 +7,14 @@
     <!-- <title><?= $nama_web_streaming; ?></title> -->
     <title>AFLIX | <?= $data['title']; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- logo -->
+    <link rel="icon" href="&#x1F923">
+    <style>
+        h1 {
+            font-size: 3vw;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+    </style>
 </head>
 
 <body>

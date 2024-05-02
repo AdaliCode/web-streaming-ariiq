@@ -15,6 +15,9 @@ class Home extends Controller // Home === videos
             $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
             $data['data_video_streaming'] = (isset($_GET['keyword'])) ? $this->model('Vidstream_model')->search($awalData, $jumlahDataPerHalaman) : $data['data_video_streaming'] = $this->model('Vidstream_model')->getAllvideos($awalData, $jumlahDataPerHalaman);
             $data['page_component'] = array($jumlahHalaman, $halamanAktif, $awalData);
+            for ($i = 0; $i < count($data['data_video_streaming']); $i++) {
+                $data['data_video_streaming'][$i]['vid_release'] = $this->indo_date_format($data['data_video_streaming'][$i]['vid_release']);
+            }
             $this->view('user/index', $data);
         } else {
             // no login

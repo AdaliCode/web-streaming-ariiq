@@ -9,12 +9,6 @@ class User_model
     {
         $this->db = new Database;
     }
-
-    // public function getAllusers()
-    // {
-    //     $this->db->query('SELECT * FROM ' . $this->table);
-    //     return $this->db->resultSet();
-    // }
     public function getUserById($id)
     {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id=:id');
@@ -34,7 +28,7 @@ class User_model
 
     public function addUser($data)
     {
-        $query = "INSERT INTO users VALUES ('', :username, :password)";
+        $query = "INSERT INTO {$this->table} VALUES ('', :username, :password)";
 
         $this->db->query($query);
         $this->db->bind('username', $data['username']);

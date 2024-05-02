@@ -18,7 +18,7 @@
                         <th scope="row" class="text-center"><?= $i + $data['page_component'][2] ?></th>
                         <td align="center"><?= $dvs["title"]; ?></td>
                         <td align="center"><?= $dvs["vid_type"]; ?></td>
-                        <td align="center"> <?= date("d M, Y", strtotime($dvs["vid_release"])); ?></td>
+                        <td align="center"> <?= $dvs["vid_release"]; ?></td>
                         <td align="center">
                             <!-- hrefnya menuju controller, bukan view, view diurus controlller -->
                             <a href="<?= BASEURL; ?>/video/detail/<?= $dvs['id'] ?>" class="text-decoration-none text-dark">Detail</a>
@@ -33,9 +33,9 @@
             </tbody>
         </table>
     </div>
-    <?php if (isset($_SESSION["login"])) : ?>
-        <a href="<?= BASEURL; ?>/video/add">Tambah Data Video</a>
-    <?php endif; ?>
+    <!-- <?php if (isset($_SESSION["login"])) : ?> -->
+    <a href="<?= BASEURL; ?>/video/add">Tambah Data Video</a>
+    <!-- <?php endif; ?> -->
     <!-- page -->
     <?php if ($data['page_component'][0] > 1) :  ?>
         <div class="float-end">

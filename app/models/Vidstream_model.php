@@ -14,7 +14,10 @@ class Vidstream_model
         if (is_null($jumlahDataPerLimit)) {
             $this->db->query('SELECT * FROM ' . $this->table);
         } else {
-            $this->db->query("SELECT * FROM {$this->table} LIMIT {$awalData}, {$jumlahDataPerLimit}");
+            // $this->db->query("SELECT * FROM {$this->table} LIMIT {$awalData}, {$jumlahDataPerLimit}");
+            $this->db->query("SELECT * FROM {$this->table} LIMIT :awalData, :jumlahDataPerLimit");
+            $this->db->bind('awalData', $awalData);
+            $this->db->bind('jumlahDataPerLimit', $jumlahDataPerLimit);
         }
         return $this->db->resultSet();
     }
@@ -160,12 +163,14 @@ class Vidstream_model
     {
         $keyword = $_GET['keyword'];
         if (is_null($jumlahDataPerLimit)) {
-            $query = "SELECT * FROM videos WHERE title LIKE :keyword";
+            $this->db->query("SELECT * FROM {$this->table} WHERE title LIKE :keyword");
         } else {
-            $query = "SELECT * FROM videos WHERE title LIKE :keyword LIMIT {$awalData}, {$jumlahDataPerLimit}";
+            $this->db->query("SELECT * FROM {$this->table} WHERE title LIKE :keyword LIMIT :awalData, :jumlahDataPerLimit");
+            $this->db->bind('awalData', $awalData);
+            $this->db->bind('jumlahDataPerLimit', $jumlahDataPerLimit);
         }
 
-        $this->db->query($query);
+        // $this->db->query($query);
         $this->db->bind('keyword', "%$keyword%");
         return $this->db->resultSet();
     }
