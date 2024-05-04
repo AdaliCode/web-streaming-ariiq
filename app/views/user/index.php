@@ -33,9 +33,7 @@
             </tbody>
         </table>
     </div>
-    <!-- <?php if (isset($_SESSION["login"])) : ?> -->
     <a href="<?= BASEURL; ?>/video/add">Tambah Data Video</a>
-    <!-- <?php endif; ?> -->
     <!-- page -->
     <?php if ($data['page_component'][0] > 1) :  ?>
         <div class="float-end">

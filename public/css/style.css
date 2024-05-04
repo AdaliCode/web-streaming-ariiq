@@ -1,0 +1,32 @@
+/* before do css, delete cache from browser */
+
+h1,
+p,
+span,
+.navbar-brand {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+h1,
+.navbar-brand {
+  font-size: 3vw;
+}
+
+.navbar-brand {
+  color: red;
+  text-decoration: underline;
+}
+#cover-video span {
+  font-size: 1.5vw;
+}
+#cover-video span:hover {
+  color: red;
+}
+#cover-video img:hover {
+  filter: blur(2px);
+}
+#cover-video p {
+  font-size: 1vw;
+  /* background: powderblue; */
+  font-style: italic;
+}

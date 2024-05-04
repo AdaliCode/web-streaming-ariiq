@@ -1,13 +1,14 @@
 <div class="container py-5">
-    <div class="row mt-3">
+    <div class="row" id="korean-drama-cover">
         <h1 class="text-uppercase">DRAMA KOREA</h1>
         <?php foreach ($data['data_video_streaming'] as $key => $dvs) : ?>
-            <div class="col-md-3">
-                <a href="<?= BASEURL; ?>/video/detail/<?= $dvs['id'] ?>" class="text-decoration-none text-dark" style="font-size: 1.5vw;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
-                    <img src="<?= BASEURL; ?>/img/<?= $dvs["cover"] ?? 'attack-on-titan.jpg'; ?>" alt="" style="width: 100%;"><br>
-                    <?= $dvs['title']; ?>
+            <div class="col-md-3" id="cover-video">
+                <a href="<?= BASEURL; ?>/video/detail/<?= $dvs['id'] ?>" class="text-decoration-none text-dark">
+                    <img src="<?= IMAGEURL; ?>/<?= $dvs["cover"] ?? 'attack-on-titan.jpg'; ?>" alt="" style="width: 100%;"><br>
+                    <i class="bi bi-play-circle"></i>
+                    <span><?= $dvs['title']; ?></span>
                 </a>
-                <p style="font-size: 1vw;font-family:'Times New Roman', Times, serif"><?= $dvs['vid_release']; ?></p>
+                <p><?= $dvs['vid_release']; ?></p>
             </div>
         <?php endforeach; ?>
     </div>

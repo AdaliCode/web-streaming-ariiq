@@ -1,16 +1,16 @@
 <div class="container py-5">
-    <div class="row">
+    <div class="row" id="info-video">
         <figure class="col-3">
             <img src="<?= BASEURL; ?>/img/<?= $data['data_video_streaming']["cover"] ?? 'attack-on-titan.jpg'; ?>" alt="" style="width: 100%;">
         </figure>
-        <div class="col">
+        <section class="col">
             <h1><?= $data["title"]; ?></h1>
             <p><?= $data['vid_release']; ?> | <?= $data['data_video_streaming']["vid_type"]; ?> | Episode : <?= $data['data_video_streaming']["episodes"]; ?></p>
             <hr>
-            <p><?= $data['data_video_streaming']["synopsis"] ?></p>
+            <p id="synopsis"><?= $data['data_video_streaming']["synopsis"] ?></p>
             <hr>
             <p>Pemeran : <?= $data['data_video_streaming']["cast"]; ?></p>
-        </div>
+        </section>
     </div>
     <hr>
     <figure class="row">
