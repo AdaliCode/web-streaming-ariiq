@@ -31,12 +31,18 @@ class Login extends Controller
     public function login()
     {
         if ($this->model('User_model')->login($_POST) > 0) {
+            // if (isset($_POST['remember'])) {
+            //     # buat cookie
+            //     setcookie('key', hash('sha256', $_POST['username']), time() + 60, '/');
+            // }
+            // echo $_COOKIE['id'];
+            // header('location: ' . BASEURL);
             echo
             "<script>
-                alert('Selesai Login');
-                document.location.href = '../';
-            </script>
-        ";
+                    alert('Selesai Login');
+                    document.location.href = '../';
+                </script>
+            ";
         } else {
             echo
             "<script>
@@ -52,8 +58,8 @@ class Login extends Controller
         $_SESSION = [];
         session_unset();
         session_destroy();
-        setcookie('id', '', time() - 3600);
-        setcookie('key', '', time() - 3600);
+        setcookie('id', '', time() - 3600, '/');
+        setcookie('key', '', time() - 3600, "/");
 
         header("Location: " . BASEURL . "/login");
         exit;

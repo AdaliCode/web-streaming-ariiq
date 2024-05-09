@@ -95,10 +95,10 @@ class Vidstream_model
         $query = "INSERT INTO videos (title, vid_type, vid_release, synopsis, episodes, cover) VALUES (:title, :vid_type, :vid_release, :synopsis, :episodes, :cover)";
 
         $this->db->query($query);
-        $this->db->bind('title', $data['title']);
-        $this->db->bind('vid_type', $data['vid_type']);
-        $this->db->bind('vid_release', $data['vid_release']);
-        $this->db->bind('synopsis', $data['synopsis']);
+        $this->db->bind('title', htmlspecialchars($data['title']));
+        $this->db->bind('vid_type',  htmlspecialchars($data['vid_type']));
+        $this->db->bind('vid_release',  $data['vid_release']);
+        $this->db->bind('synopsis',  htmlspecialchars($data['synopsis']));
         $this->db->bind('episodes', $data['episodes']);
         $this->db->bind('cover', $gambar);
         $this->db->execute();
@@ -147,10 +147,10 @@ class Vidstream_model
         WHERE id = :id";
 
         $this->db->query($query);
-        $this->db->bind('title', $data['title']);
-        $this->db->bind('vid_type', $data['vid_type']);
+        $this->db->bind('title', htmlspecialchars($data['title']));
+        $this->db->bind('vid_type', htmlspecialchars($data['vid_type']));
         $this->db->bind('vid_release', $data['vid_release']);
-        $this->db->bind('synopsis', $data['synopsis']);
+        $this->db->bind('synopsis', htmlspecialchars($data['synopsis']));
         $this->db->bind('episodes', $data['episodes']);
         $this->db->bind('cover', $gambar);
         $this->db->bind('id', $id);

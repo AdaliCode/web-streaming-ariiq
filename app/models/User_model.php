@@ -89,9 +89,9 @@ class User_model
             ";
             return false;
         }
-        // cek username bener atau salah
+        // cek username dan password bener atau salah
         $data_user = $this->getUserByUsername($username);
-        if (!$data_user) {
+        if (!$data_user || !password_verify($password, $data_user["password"])) {
             echo
             "<script>
                 alert('Username atau password salah!');
@@ -99,21 +99,12 @@ class User_model
             ";
             return false;
         }
-        // cek pass bener atau salah
-        if (!password_verify($password, $data_user["password"])) {
-            echo
-            "<script>
-                alert('pass salah!');
-            </script>
-            ";
-            return false;
-        }
         $_SESSION["login"] = true;
         // cek remember me
-        if (isset($_POST['remember'])) {
+        if (isset($data['remember'])) {
             # buat cookie
-            setcookie('id', $data_user['id'], time() + 60);
-            setcookie('key', hash('sha256', $data_user['username']), time() + 60);
+            setcookie('id', $data_user['id'], time() + 60, '/');
+            setcookie('key', hash('sha256', $data_user['username']), time() + 60, '/');
         }
         return true;
     }

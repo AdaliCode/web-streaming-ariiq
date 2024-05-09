@@ -16,17 +16,16 @@ h1,
   color: red;
   text-decoration: underline;
 }
-#cover-video span {
+#korean-drama-cover span {
   font-size: 1.5vw;
 }
-#cover-video span:hover {
+#korean-drama-cover span:hover {
   color: red;
 }
-#cover-video img:hover {
+#korean-drama-cover img:hover {
   filter: blur(2px);
 }
-#cover-video p {
+#korean-drama-cover p {
   font-size: 1vw;
-  /* background: powderblue; */
   font-style: italic;
 }
